@@ -15,31 +15,14 @@ class Vehicle {
 class Car extends Vehicle {
 	constructor (a, b, c) {
 		super(a, b, c);
-	}
-
-	honk () {
-		return super.honk();
-	}
-	toString () {
-		return super.toString();
-	}
-	numWheels () {
-		return 4;
+		this.numWheels = 4;
 	}
 }
 
 class Motorcycle extends Vehicle {
 	constructor (a, b, c) {
 		super(a, b, c);
-	}
-	honk () {
-		return super.honk();
-	}
-	toString () {
-		return super.toString();
-	}
-	numWheels () {
-		return 2;
+		this.numWheels = 2;
 	}
 	revEngine () {
 		return `VROOM!!!`;
@@ -51,11 +34,13 @@ class Garage {
 		this.capacity = a;
 		this.vehicles = [];
 	}
-	add (a) {
-		this.vehicle = a;
-		if (this.vehicle === (new Car() || new Motorcycle()) && this.capacity < 2) {
-			this.capacity++;
-			this.vehicles.push(a);
+	add (veh) {
+		if (this.capacity === 0) {
+			return 'Sorry, we are full.';
+		}
+		if (veh instanceof Vehicle) {
+			this.capacity--;
+			this.vehicles.push(veh);
 			return 'Vehicle added!';
 		}
 		return `Only vehicles are allowed in here!`;
